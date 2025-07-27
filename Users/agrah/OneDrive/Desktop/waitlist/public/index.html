@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Algorithm Waitlist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset and Basic Setup */
+        :root {
+            --bg-color: #0d1117;
+            --card-bg-color: #161b22;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #e6edf3;
+            --text-secondary: #7d8590;
+            --button-primary-bg: #f0f6fc;
+            --button-primary-text: #0d1117;
+            --input-bg: #010409;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Glow Effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(13, 17, 23, 0) 70%);
+            transform: translateY(-50%);
+            filter: blur(100px);
+            z-index: 0;
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            width: 100%;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        /* Top Home Button */
+        .home-button {
+            position: absolute;
+            top: 2rem;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .home-button:hover {
+            background-color: #111;
+        }
+
+        /* Central Card */
+        .waitlist-card {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 560px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-tag {
+            background-color: #000;
+            color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .waitlist-card h1 {
+            font-size: 2rem;
+            margin: 0;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .waitlist-card .subtitle {
+            margin: -0.5rem 0 0.5rem 0;
+            color: var(--text-secondary);
+            max-width: 450px;
+        }
+
+        /* About Section */
+        .about-section {
+            text-align: left;
+            width: 100%;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .about-section h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            color: var(--text-primary);
+        }
+
+        .about-section p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0 0 1.5rem 0;
+        }
+
+        /* Email Form */
+        .email-form {
+            display: flex;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 4px;
+            width: 100%;
+        }
+        
+        .email-input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0.65rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .email-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .join-button {
+            background-color: var(--button-primary-bg);
+            color: var(--button-primary-text);
+            border: none;
+            border-radius: 6px;
+            padding: 0.65rem 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .join-button:hover {
+            background-color: #d1d5db;
+        }
+
+        /* Copyright info inside the card */
+        .card-footer-info {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .card-footer-info p {
+            margin: 0.25rem 0;
+            line-height: 1.4;
+        }
+        
+        /* Message for form feedback */
+        .form-message {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            min-height: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="home-button">Home</button>
+
+        <div class="waitlist-card">
+            <div class="card-tag">The Algorithm</div>
+            
+            <h1>Join The Algorithm Waitlist</h1>
+            <p class="subtitle">Be the first to experience our AI-powered coding assistant for competitive programming.</p>
+
+            <div class="about-section">
+                <h2>About The Algorithm</h2>
+                <p>This project is an AI-powered coding assistant that helps users solve competitive coding problems (CCP) more effectively using a Retrieval-Augmented Generation (RAG) framework.<br><br>Instead of scraping or storing copyrighted content, this tool allows users to create their own problem statements, test cases, and constraints. The assistant then provides intelligent, context-aware help tailored specifically to the user's input.</p>
+                
+                <form id="waitlistForm">
+                    <div class="email-form">
+                        <input type="email" id="emailInput" class="email-input" placeholder="Enter your email" required>
+                        <button type="submit" class="join-button">Join Waitlist</button>
+                    </div>
+                </form>
+                <p id="formMessage" class="form-message"></p>
+
+                <div class="card-footer-info">
+                    <p>© 2025 The Algorithm. All rights reserved.</p>
+                    <p>Created by Soumyabrata Mukherjee & Adithya Agrahari</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-right">
+            Dark Mode
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('waitlistForm');
+        const emailInput = document.getElementById('emailInput');
+        const formMessage = document.getElementById('formMessage');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Stop the page from reloading
+            formMessage.textContent = 'Submitting...';
+
+            try {
+                const response = await fetch('/join', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: emailInput.value }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    formMessage.style.color = '#4ade80'; // Green text
+                    formMessage.textContent = result.message;
+                    emailInput.value = ''; // Clear input on success
+                } else {
+                    formMessage.style.color = '#f87171'; // Red text
+                    formMessage.textContent = `Error: ${result.message}`;
+                }
+            } catch (error) {
+                formMessage.style.color = '#f87171';
+                formMessage.textContent = 'An error occurred. Please try again.';
+            }
+        });
+    </script>
+
+</body>
+</html>
