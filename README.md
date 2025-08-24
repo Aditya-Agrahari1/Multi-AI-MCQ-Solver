@@ -44,7 +44,7 @@ This extension is a full-stack application with a robust, scalable backend deplo
 
 ## 📦 Installation
 
-1.  Install the extension from the **[Chrome Web Store](https://chromewebstore.google.com/)** (link will be here).
+1.  Install the extension from the **[Chrome Web Store](https://chromewebstore.google.com/)**.
 2.  Pin the extension to your toolbar for easy access.
 
 ---
